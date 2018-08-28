@@ -44,14 +44,26 @@ def saveas():
     file1.write(t)
     file1.close()
 
+#Adding the bullet point list
+def addList():
+    global text
+    text.tag_configure('bulleted_list')
+    text.insert(END, u'\u25C6', 'bullets')
+    text.insert(END, u"\tThis is the first item in the list.\n",
+    'bulleted_list')
+
+
 root.title("Word Processor")
 
 menubar = Menu(root)
 filemenu = Menu(menubar)
+insertmenu = Menu(menubar)
 filemenu.add_command(label="New", command=new)
 filemenu.add_command(label="Open", command=openFile)
 filemenu.add_command(label="Save as", command=saveas)
 filemenu.add_command(label="Quit", command=root.quit)
 menubar.add_cascade(label="File",menu=filemenu)
+insertmenu.add_command(label="Quick List", command=addList)
+menubar.add_cascade(label="Insert",menu=insertmenu)
 root.config(menu=menubar)
 root.mainloop()
